@@ -1,0 +1,247 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>在运设备及在建项目</title>
+	<link rel="stylesheet" type="text/css" href="./scripts/css/style.css">
+	<script type="text/javascript" src="./scripts/lib/d3.v3.js"></script>
+	<script type="text/javascript" src="./scripts/lib/jquery.min.js"></script>
+	
+	
+
+	
+</head>
+<body id="page0">
+	<div class="content">
+		<div class="head">
+			<div class="center">
+				<div class="logo">
+					<img src="./images/logo.bmp" />
+				</div>
+				<div class="nav">
+					<ul>
+					<li class="range"><a href="./page3.html">仓库供应区域</a></li>
+                    <li class="stock"><a href="./page1.html">仓库库存信息</a></li>
+                    <li class="money  selected"><a href="./page0.html">物资供应需求分布</a></li>
+                    <li class="equipment"><a href="./page2.html">仓库供应关系</a></li>
+                    <li class="equipment"><a href="http://localhost:8080/TJDLBigDataWebH/index.jsp ">返回预测</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="main center">
+			<!-- <div class=""> -->
+				<div class="tip">
+					<ul>
+					<li><b></b><span>在建项目</span></li>
+					<li><b></b><span>在运设备</span></li>
+					</ul>
+				</div>
+				<div class="list">
+					<div class="list-header">
+						<dl>
+							<dd>仓库编码</dd>
+							<dt>仓库名称（MDM名称）</dt>
+						</dl>
+					</div>
+					<div class="list-content">
+						<dl>
+						<dd>BGCA</dd><dt>国网天津电力滨海仓库</dt>
+						<dd>BHCA</dd><dt>国网天津电力蓟县仓库</dt>
+						<dd>BICA</dd><dt>国网天津电力静海仓库</dt>
+						<dd>BKCA</dd><dt>国网天津电力宁河仓库</dt>
+						<dd>BJCA</dd><dt>国网天津电力武清仓库</dt>
+						<dd>BLCA</dd><dt>国网天津电力宝坻仓库</dt>
+						<dd class='selected'>BAAA</dd><dt class='selected'>国网天津电力东丽中心库</dt>
+						<dd>BCDB</dd><dt>国网天津电能计量中心郁江道仓储点</dt>
+						</dl>
+					</div>
+				</div>
+				<div class="map"></div>
+
+                <style>
+                #dragbar {
+                    position: absolute;
+                    width: 61px;
+                    height: 168px;
+                    top: 390px;
+                    right: 70px;
+                }
+
+                #dragbar div {
+                    
+                    margin-left: 13;
+                    width: 35px;
+                    height: 168px;
+                    background:-moz-linear-gradient(top, #ca9b3a, #03c6d9);
+                    background:-webkit-linear-gradient(top, #ca9b3a, #03c6d9);
+                }
+
+                #dragbar img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+        
+                #dragbar a {
+                    top: -6px;
+                    left: -3px;
+                    position: absolute;
+                    width: 68px;
+                    height: 13px;
+                    background: url(images/dianya1.png) no-repeat;
+                    z-index: 10;
+                }
+    
+                #dragbar .v500 {
+                    position: absolute;
+                    top: -10px;
+                }
+
+                #dragbar .v220 {
+                    top: 102px;
+                }
+
+                #dragbar .v0 {
+                    top: 157px;
+                }
+
+                #dragbar span {
+                    width: 200px;
+                    color: #fff;
+                    position: absolute;
+                    left: 90px;
+                }
+
+                .duoshaofu {
+                    top: 45px;
+
+                }
+    
+                </style>
+
+                <div id="dragbar">
+                    <div class="dragbar-color"></div>
+                    <a id="drag" href="#"></a>
+                    <img class="dragbar-bac" src="images/dianya2.png" />
+                    <span class="v500">220kV以上</span>
+                    <span class="v220">35kV</span>
+                    <span class="v0"></span>
+                    <span class="duoshaofu">110kv(66kV)</span>
+                </div>
+				<div class="btn">
+					<a href="./page3.html" class="kucunliang"></a>
+					<a href="./page3.html" class="zhouzhuanlv"></a>
+				</div>
+
+                <script>
+
+                var changed = null
+
+                // 默认过滤等级
+                var defaultGroup = 3
+                var group = defaultGroup
+
+                function startAnimate() {
+                    var colors = ['ffb933', 'e3bf4a', 'c6c560', 'aacb77', '8ed18e', '71d8a4', '55debb', '39e4d2', '1ceae8', '00f0ff']
+                    $('#drag').animate({top: '162px' }, 5000)
+
+                    setTimeout(function() {
+
+                        $('#drag').css('top', '-7px')
+                        group = defaultGroup
+                        _drawPoints(group)
+
+                    }, 5500)
+
+                    
+                    var wait = setInterval(function() {
+
+                        var top = $('#drag').css('top')
+
+                        top = parseInt(top.substring(0, top.length - 2))
+
+                        if (top === -7) {
+                            clearInterval(wait)
+
+                        } else {
+                            group = 168 - (top + 7)
+
+                            group = parseInt(group / 42)
+
+                            if (changed != group) {
+                                changed = group
+                                _drawPoints(group)
+                            }
+
+
+                            // var color = colors[parseInt(top / 16.8)]
+
+                            // $('rect, circle').attr('stroke', '#' + color)
+                            //     .attr('stroke-width', '1px')
+
+                        }
+
+                    }, 10)
+                }
+
+                $(document).ready(function() {
+                    $('#drag').mousedown(function(e) {
+                        e.preventDefault()
+
+                        var $obj = $(this)
+                        var fatherTop = $('#dragbar').offset().top
+                        var colors = ['ffb933', 'e3bf4a', 'c6c560', 'aacb77', '8ed18e', '71d8a4', '55debb', '39e4d2', '1ceae8', '00f0ff']
+
+                        
+                        $(document).bind('mousemove', function(e) {
+                            var top = e.pageY - fatherTop
+
+                            if (top >= -6 && top <= 161) {
+                                //var color = colors[parseInt((top + 7) / 16.8)]
+                                var group = 168 - (top + 7)
+
+                                group = parseInt(group / 42)
+
+                                if (changed != group) {
+                                    changed = group
+                                    _drawPoints(group)
+                                }
+
+                                $obj.css('top', top)
+
+                                // $('circle').attr('stroke', '#' + color)
+                                //     .attr('stroke-width', '1px')
+                            }
+
+                            //var color = 'd'
+
+                        })
+                    })  // end mousedown
+
+                    $(document).mouseup(function() {
+                        $(document).unbind('mousemove')
+                    })
+
+
+                    setTimeout(function() {
+                        startAnimate()
+
+                    }, 5000)
+                    
+
+                })  // end document.ready
+                </script>
+
+			<!-- </div> -->
+		</div>
+		<div class="foot ">
+			<div class="center">
+			</div>
+		</div>
+		<script type="text/javascript" src="./scripts/js/page0.js"></script>
+		<script type="text/javascript" src="./scripts/js/script.js"></script>
+		<!--<script type="text/javascript" src="./scripts/script.js"></script>-->
+	</div>
+</body>
+</html>n

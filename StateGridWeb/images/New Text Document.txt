@@ -1,0 +1,53 @@
+BGCA	滨海仓库	7
+BHCA	蓟县 		1
+BICA	静海		4
+BKCA	宁河		5
+BJCA	武清		2
+BLCA	宝坻		3
+BAAA	东丽中心	10		东丽区
+BCDA	郁江道仓储点	13~18		市区
+
+大港	6
+塘沽	7
+西青	8
+北辰	9
+东丽	10
+汉沽	11
+津南	12
+市区	13
+
+市区	14
+市区	15
+市区	16
+市区	17
+市区	18
+
+
+
+var pointsCoordinate = [{
+		key: '武清仓库',
+		coordinate: [432, 219]
+	}, {
+		key: '静海仓库',
+		coordinate: [190, 360]
+	}, {
+		key: '滨海仓库',
+		coordinate: [502, 384]
+	}, {
+		key: '宁河仓库',
+		coordinate: [579, 305]
+	}, {
+		key: '宝坻仓库',
+		coordinate: [604, 210]
+	}, {
+		key: '蓟县仓库',
+		coordinate: [720, 117]
+	}]
+	var centerPointsCoordinate = [{
+		key: '东丽中心库',
+		coordinate: [437, 333]
+	}, ]
+	var warehousesCoordinate = [{
+		key: '郁江道仓储点',
+		coordinate: [368, 319]
+	}, ]

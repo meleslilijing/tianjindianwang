@@ -1,0 +1,78 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>仓库库存信息</title>
+	<link rel="stylesheet" type="text/css" href="./scripts/css/style.css">
+	<script type="text/javascript" src="./scripts/lib/d3.v3.js"></script>
+	<script type="text/javascript" src="./scripts/lib/jquery.min.js"></script>
+</head>
+<body id="page1">
+	<div class="content">
+		<div class="head">
+			<div class="center">
+				<div class="logo">
+					<img src="./images/logo.bmp" />
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="range"><a href="./page3.html">仓库供应区域</a></li>
+					<li class="stock selected"><a href="./page1.html">仓库库存信息</a></li>
+					<li class="money"><a href="./page0.html">物资供应需求分布</a></li>
+					<li class="equipment"><a href="./page2.html">仓库供应关系</a></li>
+					<li class="equipment"><a href="http://localhost:8080/TJDLBigDataWebH/index.jsp ">返回预测</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="main center">
+			<!-- <div class=""> -->
+				<div class="tip">
+					<ul>
+					<li><b></b><span>中心库</span></li>
+					<li><b></b><span>周转库</span></li>
+					<li><b></b><span>专业仓储点</span></li>
+					</ul>
+				</div>
+				
+
+				<div class="list">
+					<div class="list-header">
+						<dl>
+							<dd>仓库编码</dd>
+							<dt>仓库名称（MDM名称）</dt>
+						</dl>
+					</div>
+					<div class="list-content">
+						<ul>
+							<li name="所有仓库" warehouseId="ALL"><span class="dd">ALL</span><span class="dt">所有仓库</span></li>
+							<li name="国网天津电力滨海仓库" warehouseId="BGCA"><span class="dd">BGCA</span><span class="dt">国网天津电力滨海仓库</span></li>
+							<li name="国网天津电力蓟县仓库" warehouseId="BHCA"><span class="dd">BHCA</span><span class="dt">国网天津电力蓟县仓库</span></li>
+							<li name="国网天津电力静海仓库" warehouseId="BICA"><span class="dd">BICA</span><span class="dt">国网天津电力静海仓库</span></li>
+							<li name="国网天津电力宁河仓库" warehouseId="BKCA"><span class="dd">BKCA</span><span class="dt">国网天津电力宁河仓库</span></li>
+							<li name="国网天津电力武清仓库" warehouseId="BJCA"><span class="dd">BJCA</span><span class="dt">国网天津电力武清仓库</span></li>
+							<li name="国网天津电力宝坻仓库" warehouseId="BLCA"><span class="dd">BLCA</span><span class="dt">国网天津电力宝坻仓库</span></li>
+							<li name="国网天津电力东丽中心库" warehouseId="BAAA"><span class='dd'>BAAA</span><span class="dt">国网天津电力东丽中心库</span></li>
+							<li name="国网天津电能计量中心郁江道仓储点" warehouseId="BCDB"><span class='dd'>BCDB</span><span class="dt">国网天津电能计量中心郁江道仓储点</span></li>
+						</ul>
+					</div>
+				</div>
+				<div class="map">
+				</div>
+				<div class="btn">
+					<a href="./page3.html" class="kucunliang"></a>
+					<a href="./page3.html" class="zhouzhuanlv"></a>
+				</div>
+				
+			<!-- </div> -->
+		</div>
+		<div class="foot ">
+			<div class="center">
+			</div>
+		</div>
+		<script type="text/javascript" src="./scripts/js/page1.js"></script>
+		<script type="text/javascript" src="./scripts/js/script.js"></script>
+		<!--<script type="text/javascript" src="./scripts/script.js"></script>-->
+	</div>
+</body>
+</html>
